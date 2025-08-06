@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Fitsera</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div th:replace="layout :: header"></div>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2 class="auth-title">Sign up</h2>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone number" class="form-input">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                
+                <div class="auth-links">
+                    <a href="/reset-password" class="link">forgot password ?</a>
+                </div>
+                
+                <div class="auth-divider">Or</div>
+                
+                <button type="button" class="btn btn-social google-btn">
+                    <span class="social-icon">📧</span>
+                    Continue with Google
+                </button>
+                
+                <button type="button" class="btn btn-social facebook-btn">
+                    <span class="social-icon">📘</span>
+                    Continue with Facebook
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="/js/auth.js"></script>
+</body>
+</html>

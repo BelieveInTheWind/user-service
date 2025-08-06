@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title} ?: 'Fitsera'">Fitsera</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Fitsera</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">How it works</a>
+                <a href="#" class="nav-link">One time rental</a>
+                <a href="#" class="nav-link">Brands</a>
+                <a href="#" class="nav-link">Occasion</a>
+                <a href="#" class="nav-link">Wishlist</a>
+                <div class="nav-search">
+                    <input type="text" placeholder="Search" class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-icons">
+                    <button class="icon-btn">👤</button>
+                    <button class="icon-btn">🛒</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content" th:fragment="content">
+        <!-- Content will be inserted here -->
+    </main>
+    
+    <script src="/js/app.js"></script>
+</body>
+</html>
