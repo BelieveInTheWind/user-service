@@ -47,22 +47,17 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz
-                // Public authentication endpoints
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 
-                // UI endpoints
                 .requestMatchers("/", "/login", "/register", "/reset-password").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 
-                // Admin only endpoints
                 .requestMatchers("/api/users/**").hasRole("ADMIN")
                 .requestMatchers("/api/roles/**").hasRole("ADMIN")
                 
-                // User endpoints (own profile only)
                 .requestMatchers("/api/profiles/user/**").hasAnyRole("USER", "ADMIN")
                 
-                // Health check
                 .requestMatchers("/actuator/**").permitAll()
                 
                 .anyRequest().authenticated()

@@ -40,7 +40,6 @@ public class Role {
         this.description = description;
     }
     
-    // Getters and Setters
     public Long getRoleId() { return roleId; }
     public void setRoleId(Long roleId) { this.roleId = roleId; }
     

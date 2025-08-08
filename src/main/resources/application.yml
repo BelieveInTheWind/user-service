@@ -7,8 +7,8 @@ spring:
   
   datasource:
     url: jdbc:postgresql://localhost:5432/userservice_db
-    username: dat
-    password: 13712nct
+    username: #db username
+    password: #db password
     driver-class-name: org.postgresql.Driver
   
   jpa:
@@ -29,7 +29,7 @@ spring:
 app:
   jwt:
     secret: myVerySecretKeyThatIsAtLeast32CharactersLong
-    expiration: 86400000 # 24 hours in milliseconds
+    expiration: 86400000 
 
 logging:
   level:

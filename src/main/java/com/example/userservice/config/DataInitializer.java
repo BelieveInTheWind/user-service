@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.userservice.entity.Permission;
 import com.example.userservice.entity.Role;
-import com.example.userservice.entity.User;
-import com.example.userservice.entity.UserRole;
 import com.example.userservice.repository.PermissionRepository;
 import com.example.userservice.repository.RoleRepository;
 import com.example.userservice.repository.UserRepository;
@@ -36,14 +34,12 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         initializeRoles();
         initializePermissions();
-        initializeAdminUser();
-        createAdminIfNotExists("admin@admin.com", "admin123");
     }
     
     private void initializeRoles() {
         if (roleRepository.count() == 0) {
-            Role adminRole = new Role("ADMIN", "Administrator with full access");
-            Role userRole = new Role("USER", "Regular user with limited access");
+            Role adminRole = new Role("ADMIN", "Admin");
+            Role userRole = new Role("USER", "Regular user");
             
             roleRepository.save(adminRole);
             roleRepository.save(userRole);
@@ -71,43 +67,6 @@ public class DataInitializer implements CommandLineRunner {
             }
             
             System.out.println("Default permissions initialized");
-        }
-    }
-    
-    private void initializeAdminUser() {
-        if (userRepository.count() == 0) {
-            User admin = new User();
-            admin.setUserEmail("admin@admin.com");
-            admin.setPassword(passwordEncoder.encode("admin123"));
-            
-            User savedAdmin = userRepository.save(admin);
-            
-            Role adminRole = roleRepository.findByRoleName("ADMIN").orElse(null);
-            if (adminRole != null) {
-                UserRole userRole = new UserRole(savedAdmin, adminRole);
-                userRoleRepository.save(userRole);
-            }
-            
-            System.out.println("Default admin user created: admin@admin.com / admin123");
-        }
-    }
-    
-    private void createAdminIfNotExists(String email, String rawPassword) {
-        if (userRepository.findByUserEmail(email).isEmpty()) {
-            User admin = new User();
-            admin.setUserEmail(email);
-            admin.setPassword(passwordEncoder.encode(rawPassword));
-    
-            User savedAdmin = userRepository.save(admin);
-    
-            Role adminRole = roleRepository.findByRoleName("ADMIN")
-                    .orElseThrow(() -> new RuntimeException("ADMIN role not found"));
-    
-            userRoleRepository.save(new UserRole(savedAdmin, adminRole));
-    
-            System.out.println("✅ Admin created: " + email + " / " + rawPassword);
-        } else {
-            System.out.println("ℹ️ Admin already exists: " + email);
         }
     }
     

@@ -37,13 +37,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
         
-        // JWT Token is in the form "Bearer token"
+        // Bearer token 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtUtil.extractUsername(jwtToken);
             } catch (Exception e) {
-                logger.error("JWT Token parsing error", e);
+                logger.error("Token Error", e);
             }
         }
         

@@ -32,7 +32,6 @@ public class Permission {
         this.role = role;
     }
     
-    // Getters and Setters
     public Long getPermissionId() { return permissionId; }
     public void setPermissionId(Long permissionId) { this.permissionId = permissionId; }
     

@@ -1,7 +1,5 @@
-// API Base URL
 const API_BASE = 'http://localhost:8080/api';
 
-// Utility functions
 function showAlert(message, type = 'error') {
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type}`;
@@ -27,7 +25,7 @@ function hideLoading(button, originalText) {
     button.disabled = false;
 }
 
-// Login Form Handler
+// Login form
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -79,9 +77,9 @@ async function handleLogin(event) {
             // Redirect based on role
             setTimeout(() => {
                 if (result.role === 'ADMIN') {
-                    window.location.href = '/dashboard';
+                    window.location.href = '/admindashboard';
                 } else {
-                    window.location.href = '/profile';
+                    window.location.href = '/dashboard';
                 }
             }, 1000);
         } else {
@@ -119,15 +117,13 @@ async function handleRegister(event) {
         const result = await response.json();
         
         if (response.ok) {
-            // Store token and redirect
             localStorage.setItem('authToken', result.token);
             localStorage.setItem('userRole', result.role);
             
             showAlert('Registration successful!', 'success');
             
-            // Redirect to profile setup
             setTimeout(() => {
-                window.location.href = '/profile';
+                window.location.href = '/dashboard';
             }, 1000);
         } else {
             showAlert(result.message || 'Registration failed');
@@ -149,8 +145,7 @@ async function handleResetPassword(event) {
     const email = formData.get('email');
     
     try {
-        // This would typically send a reset email
-        // For now, we'll just show a success message
+        // Not finished
         showAlert('Reset instructions sent to your email!', 'success');
         
         setTimeout(() => {
@@ -167,7 +162,6 @@ async function handleResetPassword(event) {
 function checkAuth() {
     const token = localStorage.getItem('authToken');
     if (token) {
-        // Validate token with server
         fetch(`${API_BASE}/auth/validate?token=${token}`)
             .then(response => {
                 if (!response.ok) {
@@ -184,5 +178,4 @@ function logout() {
     window.location.href = '/login';
 }
 
-// Check auth on page load
 checkAuth();
